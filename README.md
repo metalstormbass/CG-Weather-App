@@ -116,12 +116,7 @@ To enable FSP, you must turn on "Auto-Protect" & "Block on Detect"
 
 ![](images/enablefsp1.PNG)
 
-Once this is turned on, you must then redeploy the function. This can be done by rerunning the deployment pipeline. To do this from the CLI, you can run the following commands"
-
-```
-git commit -m "Deploy FSP" --allow-empty
-git push
-```
+Once this is turned on, you must then redeploy the function. This can be done by rerunning the deployment pipeline. Do this by modifying the <b>_build_flag</b> and committing the changes.
 
 ## Provisioning the FSP
 
