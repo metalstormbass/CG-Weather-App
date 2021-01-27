@@ -22,8 +22,7 @@ def lambda_handler(event, context):
         weather = command_input.read()
     else:         
         weather = get_weather(city, api_key)
-        time.sleep(1)
-         
+                
     return weather
     
     
