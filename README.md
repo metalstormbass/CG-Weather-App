@@ -29,8 +29,8 @@ In order to run this demo, you need the following:
 [AWS Account](https://aws.amazon.com) with API keys <br>
 [Check Point Cloud Security Posture Management Account](https://dome9.com/) with API keys<br>
 [OpenWeatherMap](https://https://openweathermap.org/api) - API Key<br>
-    - Create an account
-    - Open your profile & generate an API key
+    - Create an account<br>
+    - Open your profile & generate an API key<br>
 ![](images/weatherapi.PNG)
 
 ## Check Point CSPM Onboarding 
