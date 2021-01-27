@@ -1,0 +1,63 @@
+name: 'CI/CD'
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  build: 
+    runs-on: ubuntu-latest
+    env:
+      working-directory: .
+      CG_TOKEN: ${{ secrets.CG_TOKEN }}
+    
+    steps:
+#Setup Environment
+    - name: "Setup Node.js"
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Setup python
+      uses: actions/setup-python@v2
+      with:
+          python-version: '3.7' 
+          architecture: 'x64'
+
+#Checkout code from repository
+    - name: Checkout Code
+      uses: actions/checkout@v1 
+
+#Install Dependencies      
+    - name: Install Relevant Plugins + Dependencies
+      run: |
+          npm install -g serverless 
+          sls plugin install -n serverless-python-requirements 
+          npm install -D https://artifactory.app.protego.io/cloudguard-serverless-plugin.tgz
+          
+#Configure AWS CLI
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1  
+          
+#Deploy function to AWS       
+    - name: Deploy to AWS
+      run: |
+        pip install awscli 
+        sls deploy -t ${CG_TOKEN} 
+      timeout-minutes: 30         
+  
+#Upload artifacts   
+    - name: Upload yml output
+      uses: actions/upload-artifact@v2
+      with:
+       name: cloudguard_output.yml
+       path: ./cloudguard_output/CloudGuardScanResults.yaml
+   
+    - name: Upload html output
+      uses: actions/upload-artifact@v2
+      with:
+       name: cloudguard_output.html
+       path: ./cloudguard_output/CloudGuardScanReport.html

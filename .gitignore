@@ -127,3 +127,16 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Dependency directories
+node_modules/
+
+# Optional npm cache directory
+.npm
+
+# Vs
+.vs/
+
+cloudguard_output/
+
+.serverless

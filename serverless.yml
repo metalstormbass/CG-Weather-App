@@ -1,0 +1,42 @@
+#Define Service Name and Provider
+service: CP-Weather-App
+provider:
+  lambdaHashingVersion: 20201221 
+  name: aws
+  runtime: python3.8
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 's3:ListBucket'
+        - 's3:PutObject'  
+      Resource: { 'Fn::Join': ['', ['arn:aws:s3:::', { 'Ref': 'ServerlessDeploymentBucket' }]] }
+#Define function and Environment Variables
+functions:
+  CP-Weather-App:
+    name: CP-Weather-App
+    handler: main.lambda_handler
+    events:
+    - http:
+        path: main.lambda_handler
+        method: ANY 
+        integration: lambda
+        request:
+            template:
+              text/xhtml: '{ "stage" : "$context.stage" }'
+              application/json: '{ "httpMethod" : "$context.httpMethod" }'    
+#DefinePlugins
+plugins:
+  - serverless-python-requirements
+  - serverless-cloudguard-plugin
+custom:
+ pythonRequirements:
+   dockerizePip: non-linux
+ cloudguard:
+    fsp:
+      Enabled: true
+    proact:
+      Enabled: true
+      StoreJobReport: true
+      Features:
+        PermissiveRole:
+          Enabled: true

@@ -1,0 +1,10 @@
+{
+  "name": "CP-Weather-App",
+  "description": "",
+  "version": "0.1.0",
+  "dependencies": {},
+  "devDependencies": {
+    "serverless-cloudguard-plugin": "https://artifactory.app.protego.io/cloudguard-serverless-plugin.tgz",
+    "serverless-python-requirements": "^5.1.0"
+  }
+}
