@@ -1,5 +1,8 @@
 # CG-Weather-App - Cloudguard Workload Demo
 
+![](images/logo.png)
+
+
 Written by Michael Braun
 
 ![CI/CD](https://github.com/metalstormbass/CG-Weather-App/workflows/CI/CD/badge.svg?event=push) 
