@@ -31,9 +31,6 @@ In order to run this demo, you need the following:
 [Check Point Cloud Security Posture Management Account](https://dome9.com/) with API keys<br>
 [OpenWeatherMap](https://https://openweathermap.org/api) - API Key<br>
 
-You can also use this API key for OpenWeatherMap:
-
-```d006ed318b33fd0baad3aec15369b3ab```
 
 ## Check Point CSPM Onboarding 
 
@@ -131,8 +128,7 @@ In the scripts directory, run profile.py. <br>
 
 Target: Input the api gateway address that you noted earlier. <br>
 City: Enter any real city. <br>
-API Key: Input your Api Key or use this: ```d006ed318b33fd0baad3aec15369b3ab```
-
+API Key: Input your Api Key<br> 
 
 Here is what it looks like:
 
@@ -141,7 +137,7 @@ Here is what it looks like:
 Weather App - Lambda Function
 Target: <insert-api-gateway-here>
 City: Kelowna
-API Key: d006ed318b33fd0baad3aec15369b3ab
+API Key: <api-key-here>
 Working
 .
 .
@@ -157,7 +153,7 @@ To use the function in a non-malicous way, navigate to the scripts directory and
 Weather App - Lambda Function
 Target: <insert-api-gateway-here>
 City: Kelowna
-API Key: d006ed318b33fd0baad3aec15369b3ab
+API Key: <api-key-here>
 "The current temperature in Kelowna is -1.57 degrees, but it feels like -8.94 degrees"
 ```
 

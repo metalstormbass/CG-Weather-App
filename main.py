@@ -10,7 +10,7 @@ def get_weather(city, api_key):
      response = requests.get(url)
      data = json.loads(response.content)
      output = "The current temperature in " + city +" is " + str(data['main']['temp']) + " degrees, but it feels like " + str(data['main']['feels_like']) + " degrees"
-   except error as e:
+   except Exception as as e:
      output = "There was a problem with the request " + e
 
    return output
