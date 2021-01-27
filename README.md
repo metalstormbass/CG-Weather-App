@@ -11,7 +11,7 @@ Written by Michael Braun
     <img src="https://img.shields.io/badge/Version-1.0.0-green" />
 </p>    
 
-This document outlines how integrate Cloudguard Workloads with the Serverless framework in a CI/CD pipeline. This function uses the OpenWeatherMap API to return temperature values. <b> This demo simulates a compromised supply chain where a back door has been inserted into the function.</b>
+This document outlines how to integrate Cloudguard Workloads with the Serverless framework in a CI/CD pipeline. This function uses the OpenWeatherMap API to return temperature values. <b> This demo simulates a compromised supply chain where a back door has been inserted into the function.</b>
 
 ![](images/function1.png)
 
@@ -206,3 +206,5 @@ Here is the corresponding alert:
 ## Cleanup
 
 To remove this function, create or modify a file call <b>_destroy_flag</b>. This will run the destroy pipeline and cleanup the entire deployment.
+
+
