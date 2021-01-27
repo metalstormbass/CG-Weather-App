@@ -2,7 +2,6 @@
 
 ![](images/logo.png)
 
-
 Written by Michael Braun
 
 ![CI/CD](https://github.com/metalstormbass/CG-Weather-App/workflows/CI/CD/badge.svg?event=push) 
@@ -30,7 +29,9 @@ In order to run this demo, you need the following:
 [AWS Account](https://aws.amazon.com) with API keys <br>
 [Check Point Cloud Security Posture Management Account](https://dome9.com/) with API keys<br>
 [OpenWeatherMap](https://https://openweathermap.org/api) - API Key<br>
-
+    - Create an account
+    - Open your profile & generate an API key
+![](images/weatherapi.PNG)
 
 ## Check Point CSPM Onboarding 
 
@@ -91,7 +92,14 @@ Second, select the "Actions" tab and enable workflows.
 
 ## Run the Build
 
-To deploy this function to AWS, modifiy the _build_flag and commit the changes. This kicks off the Github Action. This will deploy the function. Once the build is finished, you will then see it in Check Point CSPM<br>
+To deploy this function to AWS, commit an empty change to the repository:
+
+```
+git commit -m "Deploy to AWS" --allow-empty
+git push
+```
+
+This kicks off the Github Action. This will deploy the function. Once the build is finished, you will then see it in Check Point CSPM<br>
 
 ![](images/build.PNG)
 
