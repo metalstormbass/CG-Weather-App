@@ -92,12 +92,7 @@ Second, select the "Actions" tab and enable workflows.
 
 ## Run the Build
 
-To deploy this function to AWS, commit an empty change to the repository:
-
-```
-git commit -m "Deploy to AWS" --allow-empty
-git push
-```
+To deploy this function to AWS, create or change a file called <b>_build_flag</b>. Commit and push the changes.
 
 This kicks off the Github Action. This will deploy the function. Once the build is finished, you will then see it in Check Point CSPM<br>
 
