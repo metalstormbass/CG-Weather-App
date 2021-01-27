@@ -28,7 +28,9 @@ In order to run this demo, you need the following:
 [Github Account](https://github.com) <br>
 [AWS Account](https://aws.amazon.com) with API keys <br>
 [Check Point Cloud Security Posture Management Account](https://dome9.com/) with API keys<br>
-[OpenWeatherMap](https://https://openweathermap.org/api) - API Key<br>
+
+### Weather API Key
+[OpenWeatherMap](https://https://openweathermap.org/api)<br>
     - Create an account<br>
     - Open your profile & generate an API key<br>
 ![](images/weatherapi.PNG)
