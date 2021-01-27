@@ -11,7 +11,7 @@ def get_weather(city, api_key):
    data = json.loads(response.content)
    #except error as e:
    #response = "There was a problem with the request " + e
-   output = "The current temperature in " + city +" is " + str(data['main']['temp']) + " degrees, but it feels like " + str(data['main']['feels_like'] + " degrees")
+   output = "The current temperature in " + city +" is " + str(data['main']['temp']) + " degrees, but it feels like " + str(data['main']['feels_like']) + " degrees"
    return output
 def lambda_handler(event, context):
     api_key = event['body']['api_key']
