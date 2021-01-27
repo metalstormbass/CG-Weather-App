@@ -205,4 +205,4 @@ Here is the corresponding alert:
 
 ## Cleanup
 
-To remove this function, create or modify a file call <b>_build_flag</b>. This will run the destroy pipeline and cleanup the entire deployment.
+To remove this function, create or modify a file call <b>_destroy_flag</b>. This will run the destroy pipeline and cleanup the entire deployment.
