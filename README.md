@@ -111,39 +111,6 @@ Depending on when you build your function in relation to the sync interval it ma
 curl -X POST https://api.dome9.com/v2/cloudaccounts/<CLOUDGUARD_ACCOUNT_ID/SyncNow  --basic -u DOME9_API_KEY:DOME_API_SECRET  -H 'Accept: application/json'
 ```
 
-## Enabling FSP
-Navigate to the asset within CSPM.<br> 
-
-To enable FSP, you must turn on "Auto-Protect" & "Block on Detect"
-
-![](images/enablefsp1.PNG)
-
-Once this is turned on, you must then redeploy the function. This can be done by rerunning the deployment pipeline. Do this by modifying the <b>_build_flag</b> and committing the changes.
-
-## Provisioning the FSP
-
-In order for the function to be fully protected, the learning process must complete. This takes aproximately 3000 invocations. I have included a script that will perform this process. Ensure you enter real information as the function must be profiled with real activity. <br>
-
-In the scripts directory, run profile.py. <br> 
-
-Target: Input the api gateway address that you noted earlier. <br>
-City: Enter any real city. <br>
-API Key: Input your Api Key<br> 
-
-Here is what it looks like:
-
-```
-λ .\profile.py
-Weather App - Lambda Function
-Target: <insert-api-gateway-here>
-City: Kelowna
-API Key: <api-key-here>
-Working
-.
-.
-```
-Keep an eye on the serverless asset in CSPM and you will see the behavioral finish learning. Once this is done, you can kill the profile script.
-
 ## Legitimate use of CG-Weather-App
 
 To use the function in a non-malicous way, navigate to the scripts directory and run activity.py. Here is an example of normal operation:
@@ -176,10 +143,47 @@ API Key: backdoor
 ""
 ```
 
-If the behavioral protection was not enabled, this would have returned the environment variables. However, as you can see, the output is ```""```. You will also see a corresponding alert in the Threat&Events Tab. <br>
+This will return the environment variables.
+Now let's enable protection and see it in action 
+
+## Enabling FSP
+Navigate to the asset within CSPM.<br> 
+
+To enable FSP, you must turn on "Auto-Protect" & "Block on Detect"
+
+![](images/enablefsp1.PNG)
+
+Once this is turned on, you must then redeploy the function. This can be done by rerunning the deployment pipeline. Do this by modifying the <b>_build_flag</b> and committing the changes.
+
+## Provisioning the FSP
+
+In order for the function to be fully protected, the learning process must complete. This takes aproximately 3000 invocations. I have included a script that will perform this process. Ensure you enter real information as the function must be profiled with real activity. <br>
+
+In the scripts directory, run profile.py. <br> 
+
+Target: Input the api gateway address that you noted earlier. <br>
+City: Enter any real city. <br>
+API Key: Input your Api Key<br> 
+
+Here is what it looks like:
+
+```
+λ .\profile.py
+Weather App - Lambda Function
+Target: <insert-api-gateway-here>
+City: Kelowna
+API Key: <api-key-here>
+Working
+.
+.
+```
+Now, try to run the legitimate use-case and observe that our function is still working
+Next, try to run the attack scenraio and observe that this is being blocked and reported 
+You will also see a corresponding alert in the Threat&Events Tab. <br>
 
 ![](images/block.PNG)
 
+Keep an eye on the serverless asset in CSPM and you will see the behavioral finish learning. Once this is done, you can kill the profile script.
 ### Reverse Shell Command Injection
 
 For a more malicious script, you can try to run a reverse shell.<br>
