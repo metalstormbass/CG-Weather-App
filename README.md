@@ -30,7 +30,7 @@ In order to run this demo, you need the following:
 [Check Point Cloud Security Posture Management Account](https://dome9.com/) with API keys<br>
 
 ### Weather API Key
-Go to [OpenWeatherMap](https://https://openweathermap.org/api) and:<br>
+Go to [OpenWeatherMap](https://openweathermap.org/api) and:<br>
     - Create an account<br>
     - Open your profile & generate an API key<br>
 ![](images/weatherapi.PNG)
