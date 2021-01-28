@@ -16,7 +16,7 @@ def post(target, city, api_key):
        time.sleep(0.05)
        output = response.content
        output = output.decode('utf-8')
-       print (">", end="")
+       print (".", end="")
        sys.stdout.flush()
 
 #Input target
